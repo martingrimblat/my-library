@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
-import { ReadButton } from './ReadButton';
 
 
 export const Logger = () => {
@@ -14,7 +13,8 @@ export const Logger = () => {
         {
             title,
             author,
-            publisher
+            publisher,
+            read
         }).then(() => console.log("Success"))
     }
     
@@ -30,7 +30,7 @@ export const Logger = () => {
                     <label htmlFor='Publisher'>Publisher</label>
                     <input type="text" onChange={(e) => setPublisher(e.target.value)}></input>
                 </div>
-                <ReadButton onClick={() => setRead(current => !current)} />
+                <button onClick={() => setRead(read => !read)}>{ read ? "Read" : "Mark as Read" }</button>
                 <button onClick={addBook}>Log</button>
             </div>
         </div>
