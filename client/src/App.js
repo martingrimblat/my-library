@@ -7,11 +7,12 @@ import { Library } from './components/Library';
 
 function App() {
   return (
-    <div>
+    <div className='body-container'>
       <Header />
-      <Logger />
-      <Counter />
-      <Library />
+      <div className='page-container'>
+        <Logger />  
+        <Library />
+      </div>
     </div>
   );
 }

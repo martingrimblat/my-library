@@ -19,9 +19,9 @@ export const Logger = () => {
     }
     
     return (
-        <div>
-            <h2>Log a Book</h2>
-            <div>
+        <div className='logger'>
+            <div className='container'>
+                <h2>Log a Book</h2>
                 <div>
                     <label htmlFor='Title'>Title</label>
                     <input type="text" onChange={(e) => setTitle(e.target.value)}></input>
@@ -30,8 +30,10 @@ export const Logger = () => {
                     <label htmlFor='Publisher'>Publisher</label>
                     <input type="text" onChange={(e) => setPublisher(e.target.value)}></input>
                 </div>
-                <button onClick={() => setRead(read => !read)}>{ read ? "Read" : "Mark as Read" }</button>
-                <button onClick={addBook}>Log</button>
+                <div className='button-container'>
+                    <button className={read ? 'read-button' : 'markAsRead-button'} onClick={() => setRead(read => !read)}>{ read ? "Read" : "Mark as Read" }</button>
+                    <button className='log-button' onClick={addBook}>Log</button>
+                </div>
             </div>
         </div>
   )

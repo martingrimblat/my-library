@@ -45,11 +45,24 @@ app.put('/update', (req, res) => {
     const newRead = !req.body.read;
     db.query('UPDATE library SET _read = ? WHERE id = ?',
     [newRead, id],
-    (err, res) => {
+    (err, result) => {
         if(err){
             console.log(err);
         } else {
-            res.send(result)
+            res.send("Value Updated")
+        }
+    })
+})
+
+app.delete('/delete/:id', (req, res) => {
+    const id = req.params.id;
+
+    db.query("DELETE FROM library WHERE id = ?", id,
+    (err, result) => {
+        if(err){
+            console.log(err);
+        } else {
+            res.send("Book deleted")
         }
     })
 })

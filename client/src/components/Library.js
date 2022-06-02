@@ -9,6 +9,8 @@ export const Library = () => {
     setLibrary(res.data);
   }
 
+  getLibrary();
+
   const toggleRead = (read, id) => {
     Axios.put('http://localhost:3001/update',
     {
@@ -25,25 +27,36 @@ export const Library = () => {
     })
   }
 
-  const deleteBook = () => {
-
+  const deleteBook = (id) => {
+    Axios.delete(`http://localhost:3001/delete/${id}`).then(
+      setLibrary(library.filter(
+        (val) => {
+          return val.id !== id;
+        }
+      ))
+    )
   }
 
   return (
-    <div>
-      <button onClick={() => {
-        getLibrary()
-        }} />
+    <div className='library'>
       <div>
         {library.map(book => {
-          return <li key={book.id}>
-            <p>{book.title}</p>
-            <p>{book.author}</p>
-            <p>{book.publisher}</p>
-            <p>{book._read ? 'Read' : 'Not Read'}</p>
-            <button onClick={toggleRead(book._read, book.id)}>{book._read ? 'Read' : 'Mark as Read'}</button>
-            <button onClick={deleteBook}>X</button>
-          </li>
+          return(
+            <div className='book'> 
+              <li key={book.id}>
+                <div className='book-content'>
+                  <div className='book-info'>
+                    <p className='title'>{book.title}</p>
+                    <p className='author'>{book.author}</p>
+                    <p className='publisher'>{book.publisher}</p>
+                  </div>
+                  <div className='book-buttons'>
+                    <button onClick={() => toggleRead(book._read, book.id)}>{book._read ? 'Read' : 'Mark as Read'}</button>
+                    <button onClick={() => deleteBook(book.id)}>X</button>
+                  </div>
+                </div>
+              </li>
+            </div>)
         })} 
       </div>
     </div>
