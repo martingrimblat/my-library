@@ -51,8 +51,11 @@ export const Library = () => {
                     <p className='publisher'>{book.publisher}</p>
                   </div>
                   <div className='book-buttons'>
-                    <button onClick={() => toggleRead(book._read, book.id)}>{book._read ? 'Read' : 'Mark as Read'}</button>
-                    <button onClick={() => deleteBook(book.id)}>X</button>
+                    <button className={book._read ? 'read-button small' : 'markAsRead-button small'}
+                     onClick={() => toggleRead(book._read, book.id)}>
+                       {book._read ? 'Read' : 'Mark as Read'}
+                    </button>
+                    <button className='delete-button' onClick={() => deleteBook(book.id)}>X</button>
                   </div>
                 </div>
               </li>
