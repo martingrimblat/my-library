@@ -3,15 +3,18 @@ const app = express();
 const mysql = require('mysql');
 const cors = require('cors');
 
+require('dotenv').config({path: './config/.env'})
+
 app.use(cors());
 app.use(express.json())
 
 const db = mysql.createConnection({
-    user: 'root',
-    host: "localhost",
-    password: 'm4635105',
-    database: 'myLibrarySystem'
+    user: 'b8c942c583cf0c',
+    host: "us-cdbr-east-05.cleardb.net",
+    password: '371761aa',
+    database: 'heroku_b713796b166752a'
 });
+
 
 app.post('/log', (req, res) => {
     const title = req.body.title;
@@ -67,4 +70,8 @@ app.delete('/delete/:id', (req, res) => {
     })
 })
 
-app.listen(3001, () => {console.log("The server is running on port 3001")});
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
+    console.log(`The server is running on port ${PORT}`)
+});

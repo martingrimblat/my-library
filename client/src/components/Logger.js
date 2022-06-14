@@ -9,7 +9,7 @@ export const Logger = () => {
     const [read, setRead] = useState(false)
 
     const addBook = () => {
-        Axios.post('http://localhost:3001/log',
+        Axios.post('https://my-library-heroku.herokuapp.com/log',
         {
             title,
             author,

@@ -5,14 +5,14 @@ export const Library = () => {
   const [library, setLibrary] = useState([]);
   
   const getLibrary = async () => {
-    const res = await Axios.get('http://localhost:3001/get');
+    const res = await Axios.get('https://my-library-heroku.herokuapp.com/get');
     setLibrary(res.data);
   }
 
   getLibrary();
 
   const toggleRead = (read, id) => {
-    Axios.put('http://localhost:3001/update',
+    Axios.put('https://my-library-heroku.herokuapp.com/update',
     {
       read,
       id
@@ -28,7 +28,7 @@ export const Library = () => {
   }
 
   const deleteBook = (id) => {
-    Axios.delete(`http://localhost:3001/delete/${id}`).then(
+    Axios.delete(`https://my-library-heroku.herokuapp.com/${id}`).then(
       setLibrary(library.filter(
         (val) => {
           return val.id !== id;
@@ -42,8 +42,8 @@ export const Library = () => {
       <div>
         {library.map(book => {
           return(
-            <div className='book'> 
-              <li key={book.id}>
+            <li key={book.id}>
+                <div className='book'> 
                 <div className='book-content'>
                   <div className='book-info'>
                     <p className='title'>{book.title}</p>
@@ -58,8 +58,9 @@ export const Library = () => {
                     <button className='delete-button' onClick={() => deleteBook(book.id)}>X</button>
                   </div>
                 </div>
-              </li>
-            </div>)
+              </div>
+            </li>
+            )
         })} 
       </div>
     </div>
