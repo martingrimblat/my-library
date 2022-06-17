@@ -16,10 +16,14 @@ const BookSchema = new mongoose.Schema({
         trim: true,
         required: [true, 'Please add the publisher']
     },
+    read: {
+        type: Boolean,
+        default: false
+    },
     createdAt: {
         type: Date,
         default: Date.now
     }
 });
 
-module.export = mongoose.model('Book', BookSchema);
+module.exports = mongoose.model('Book', BookSchema);

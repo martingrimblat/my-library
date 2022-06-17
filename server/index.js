@@ -1,21 +1,32 @@
+const path = require('path');
 const express = require('express');
-const app = express();
-const library = require('./routes/library');
-const connectDB = require('./config/db');
-const Book = require('./models/Book');
+const dotenv = require('dotenv');
+const colors = require('colors');
 const morgan = require('morgan');
-const cors = require('cors');
+const connectDB = require('./config/db');
 
-require('dotenv').config({path: './config/.env'})
+dotenv.config({ path: './config/.env' });
 
 connectDB();
 
-app.use('/library', library);
+const library = require('./routes/library');
+const app = express();
+
 app.use(express.json());
-app.use(cors());
+if(process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+  }
+
+  app.use('/library', library);
+  
+  if(process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+  
+    app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')));
+  }
 
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
-    console.log(`The server is running on port ${PORT}`)
+    console.log(`The server is running on port ${PORT}`.yellow.bold)
 });

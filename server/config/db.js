@@ -7,7 +7,7 @@ const connectDB = async () => {
       useUnifiedTopology: true
     });
 
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
+    console.log(`MongoDB Connected: ${conn.connection.host}`.blue);
   } catch (err) {
     console.log(`Error: ${err.message}`);
     process.exit(1);
