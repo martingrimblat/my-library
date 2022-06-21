@@ -71,15 +71,16 @@ exports.getLibrary = async (req, res, next) => {
 
   exports.updateRead = async (req, res, next) => {
     try {
-      const toUpdate = await Book.findOne({ id: req.params.id })
-      const book = await Book.updateOne({id: req.params.id},
+      const prevRead = req.body.read;
+      const book = await Book.updateOne({_id: req.params.id},
         {$set:
-          { read: !toUpdate.read }
+          { read: !prevRead }
         })
       
       return res.status(200).json({
         success: true,
-        data: book
+        data: book,
+        message: `Read value switched from ${prevRead ? 'true' : 'false'} to ${prevRead ? 'false' : 'true'}`
       })
     } catch (err) {
       return res.status(500).json({
