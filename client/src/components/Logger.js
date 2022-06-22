@@ -9,7 +9,7 @@ export const Logger = () => {
     const [read, setRead] = useState(false)
 
     const addBook = () => {
-        Axios.post('http://localhost:3001/library',
+        Axios.post('/library',
         {
             title,
             author,

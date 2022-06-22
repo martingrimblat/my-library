@@ -5,14 +5,14 @@ export const Library = () => {
   const [library, setLibrary] = useState([]);
   
   const getLibrary = async () => {
-    const res = await Axios.get('http://localhost:3001/library');
+    const res = await Axios.get('/library');
     setLibrary(res.data.data);
   }
 
   getLibrary();
 
   const toggleRead = (read, id) => {
-    Axios.put(`http://localhost:3001/library/${id}`, {read}).then(response => {
+    Axios.put(`/library/${id}`, {read}).then(response => {
       setLibrary(library.map(val => {
         return val.id == id
         ? {
@@ -24,7 +24,7 @@ export const Library = () => {
   }
 
   const deleteBook = (id) => {
-    Axios.delete(`http://localhost:3001/library/${id}`).then(
+    Axios.delete(`/library/${id}`).then(
       setLibrary(library.filter(
         (val) => {
           return val.id !== id;
